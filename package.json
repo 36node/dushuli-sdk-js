@@ -46,7 +46,7 @@
     ]
   },
   "dependencies": {
-    "@36node/fetch": "^0.5.1",
+    "@36node/fetch": "^0.6.0",
     "@36node/query-normalizr": "^0.4.0",
     "commander": "^2.16.0"
   },
