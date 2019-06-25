@@ -428,4 +428,112 @@ export default class SDK {
       });
     },
   };
+  /**
+   * invitation's methods
+   */
+  invitation = {
+    /**
+     * Create invitation 可以用于发送邀请码
+     *
+     * @param {CreateInvitationRequest} req createInvitation request
+     * @returns {Promise<CreateInvitationResponse>} The invitaion created
+     */
+    createInvitation: (req = {}) => {
+      const { headers, body } = req;
+
+      if (!body) throw new Error("requetBody is required for createInvitation");
+
+      return fetch(`${this.base}/invitations`, {
+        method: "post",
+        body,
+        headers: { Authorization: this.auth, ...headers },
+      });
+    },
+    /**
+     * List invitations
+     *
+     * @param {ListInvitationsRequest} req listInvitations request
+     * @returns {Promise<ListInvitationsResponse>} A paged array of invitations
+     */
+    listInvitations: (req = {}) => {
+      const { query, headers } = req;
+
+      return fetch(`${this.base}/invitations`, {
+        method: "get",
+        query: denormalize(query),
+        headers: { Authorization: this.auth, ...headers },
+      });
+    },
+    /**
+     * bulk upsert invitations
+     *
+     * @param {UpdateInvitationsRequest} req updateInvitations request
+     * @returns {Promise<UpdateInvitationsResponse>} The invitations be uperted
+     */
+    updateInvitations: (req = {}) => {
+      const { headers, body } = req;
+
+      if (!body)
+        throw new Error("requetBody is required for updateInvitations");
+
+      return fetch(`${this.base}/invitations`, {
+        method: "put",
+        body,
+        headers: { Authorization: this.auth, ...headers },
+      });
+    },
+    /**
+     * Get invitation by id
+     *
+     * @param {GetInvitationRequest} req getInvitation request
+     * @returns {Promise<GetInvitationResponse>} The invitation with given id
+     */
+    getInvitation: (req = {}) => {
+      const { invitationId, headers } = req;
+
+      if (!invitationId)
+        throw new Error("invitationId is required for getInvitation");
+
+      return fetch(`${this.base}/invitations/${invitationId}`, {
+        method: "get",
+        headers: { Authorization: this.auth, ...headers },
+      });
+    },
+    /**
+     * Update invitation
+     *
+     * @param {UpdateInvitationRequest} req updateInvitation request
+     * @returns {Promise<UpdateInvitationResponse>} The invitation
+     */
+    updateInvitation: (req = {}) => {
+      const { invitationId, headers, body } = req;
+
+      if (!invitationId)
+        throw new Error("invitationId is required for updateInvitation");
+      if (!body) throw new Error("requetBody is required for updateInvitation");
+
+      return fetch(`${this.base}/invitations/${invitationId}`, {
+        method: "put",
+        body,
+        headers: { Authorization: this.auth, ...headers },
+      });
+    },
+    /**
+     * delete invitation
+     *
+     * @param {DeleteInvitationRequest} req deleteInvitation request
+     * @returns {Promise<DeleteInvitationResponse>} invitation deleted
+     */
+    deleteInvitation: (req = {}) => {
+      const { invitationId, headers } = req;
+
+      if (!invitationId)
+        throw new Error("invitationId is required for deleteInvitation");
+
+      return fetch(`${this.base}/invitations/${invitationId}`, {
+        method: "delete",
+        headers: { Authorization: this.auth, ...headers },
+      });
+    },
+  };
 }

@@ -13,6 +13,7 @@ declare class SDK {
   order: SDK.OrderAPI;
   setting: SDK.SettingAPI;
   stats: SDK.StatsAPI;
+  invitation: SDK.InvitationAPI;
 }
 
 declare namespace SDK {
@@ -120,6 +121,32 @@ declare namespace SDK {
      * list stats
      */
     listStats(req: ListStatsRequest): Promise<ListStatsResponse>;
+  }
+  export interface InvitationAPI {
+    /**
+     * Create invitation 可以用于发送邀请码
+     */
+    createInvitation(req: CreateInvitationRequest): Promise<CreateInvitationResponse>;
+    /**
+     * List invitations
+     */
+    listInvitations(req: ListInvitationsRequest): Promise<ListInvitationsResponse>;
+    /**
+     * bulk upsert invitations
+     */
+    updateInvitations(req: UpdateInvitationsRequest): Promise<UpdateInvitationsResponse>;
+    /**
+     * Get invitation by id
+     */
+    getInvitation(req: GetInvitationRequest): Promise<GetInvitationResponse>;
+    /**
+     * Update invitation
+     */
+    updateInvitation(req: UpdateInvitationRequest): Promise<UpdateInvitationResponse>;
+    /**
+     * delete invitation
+     */
+    deleteInvitation(req: DeleteInvitationRequest): Promise<DeleteInvitationResponse>;
   }
 
   type CreatePaymentRequest = {
@@ -346,6 +373,65 @@ declare namespace SDK {
     };
   };
 
+  type CreateInvitationRequest = {
+    body: CreateInvitationBody;
+  };
+
+  type CreateInvitationResponse = {
+    body: Invitation;
+  };
+
+  type ListInvitationsRequest = {
+    query: {
+      limit?: number;
+      offset?: string;
+
+      filter: {
+        ns?: string;
+        sub?: string;
+        code?: string;
+        phone?: string;
+        used?: string;
+      };
+    };
+  };
+
+  type ListInvitationsResponse = {
+    body: Array<Invitation>;
+    headers: {
+      xTotalCount: string;
+    };
+  };
+
+  type UpdateInvitationsRequest = {
+    body: Array<UpdateInvitationsBody>;
+  };
+
+  type UpdateInvitationsResponse = {
+    body: Array<Invitation>;
+  };
+
+  type GetInvitationRequest = {
+    invitationId: string;
+  };
+
+  type GetInvitationResponse = {
+    body: Invitation;
+  };
+
+  type UpdateInvitationRequest = {
+    invitationId: string;
+    body: UpdateInvitationBody;
+  };
+
+  type UpdateInvitationResponse = {
+    body: Invitation;
+  };
+
+  type DeleteInvitationRequest = {
+    invitationId: string;
+  };
+
   type StatsData = {
     value: number;
   };
@@ -424,12 +510,30 @@ declare namespace SDK {
     createdBy: string;
   };
 
+  type PriceItem = {
+    purchaseStart: string;
+    purchaseEnd: string;
+    period: number;
+    start: date;
+    end: date;
+    price: number;
+  };
+
   type Product = {
     id: string;
     createdAt: string;
     updatedAt: string;
     slug: string;
     price: number;
+    priceItems: Array<{
+      purchaseStart: string;
+      purchaseEnd: string;
+      period: number;
+      start: date;
+      end: date;
+      price: number;
+    }>;
+    originalPrice: number;
     name: string;
     description: string;
     start: string;
@@ -443,6 +547,41 @@ declare namespace SDK {
     user: string;
     birthday: string;
     alarm: string;
+  };
+
+  type Invitation = {
+    id: string;
+    ns: string;
+    createdAt: string;
+    code: string;
+    email: string;
+    phone: string;
+    sub: string;
+    expireAt: string;
+    period: number;
+    until: string;
+    used: boolean;
+    usedAt: string;
+  };
+
+  type UpdateInvitationBody = {
+    until: string;
+    period: number;
+  };
+
+  type UpdateInvitationsBody = {
+    id: string;
+    code: string;
+    until: string;
+    period: number;
+  };
+
+  type CreateInvitationBody = {
+    until: string;
+    period: number;
+    email: string;
+    phone: string;
+    sub: string;
   };
 
   type Err = {
