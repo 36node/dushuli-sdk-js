@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.2.0](http:///@36node/dushuli-sdk/compare/v0.1.2...v0.2.0) (2019-06-25)
+
+
+### Features
+
+* add invitation ([e8c2812](http:///@36node/dushuli-sdk/commits/e8c2812))
+
+
+
 ## [0.1.2](http:///@36node/dushuli-sdk/compare/v0.1.1...v0.1.2) (2019-06-08)
 
 
