@@ -14,6 +14,7 @@ declare class SDK {
   setting: SDK.SettingAPI;
   stats: SDK.StatsAPI;
   invitation: SDK.InvitationAPI;
+  formId: SDK.FormIdAPI;
 }
 
 declare namespace SDK {
@@ -147,6 +148,12 @@ declare namespace SDK {
      * delete invitation
      */
     deleteInvitation(req: DeleteInvitationRequest): Promise<DeleteInvitationResponse>;
+  }
+  export interface FormIdAPI {
+    /**
+     * Save formId 保存小程序 formId
+     */
+    createFormId(req: CreateFormIdRequest): Promise<CreateFormIdResponse>;
   }
 
   type CreatePaymentRequest = {
@@ -432,6 +439,14 @@ declare namespace SDK {
     invitationId: string;
   };
 
+  type CreateFormIdRequest = {
+    body: CreateFormIdBody;
+  };
+
+  type CreateFormIdResponse = {
+    body: FormId;
+  };
+
   type StatsData = {
     value: number;
   };
@@ -551,37 +566,61 @@ declare namespace SDK {
 
   type Invitation = {
     id: string;
-    ns: string;
     createdAt: string;
     code: string;
     email: string;
     phone: string;
-    sub: string;
     expireAt: string;
     period: number;
-    until: string;
+    start: string;
+    end: string;
     used: boolean;
     usedAt: string;
+    usedBy: string;
+    user: {};
+    source: string;
+    comment: string;
   };
 
   type UpdateInvitationBody = {
-    until: string;
+    start: string;
+    end: string;
     period: number;
+    source: string;
+    comment: string;
+    used: boolean;
+    usedBy: string;
+    user: {};
+    email: string;
+    phone: string;
   };
 
   type UpdateInvitationsBody = {
     id: string;
     code: string;
-    until: string;
+    start: string;
+    end: string;
     period: number;
   };
 
   type CreateInvitationBody = {
-    until: string;
+    start: string;
+    end: string;
     period: number;
     email: string;
     phone: string;
-    sub: string;
+  };
+
+  type CreateFormIdBody = {
+    user: string;
+    formId: string;
+  };
+
+  type FormId = {
+    user: string;
+    formId: string;
+    used: string;
+    expiredAt: string;
   };
 
   type Err = {

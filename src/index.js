@@ -536,4 +536,26 @@ export default class SDK {
       });
     },
   };
+  /**
+   * formId's methods
+   */
+  formId = {
+    /**
+     * Save formId 保存小程序 formId
+     *
+     * @param {CreateFormIdRequest} req createFormId request
+     * @returns {Promise<CreateFormIdResponse>} The formId created
+     */
+    createFormId: (req = {}) => {
+      const { headers, body } = req;
+
+      if (!body) throw new Error("requetBody is required for createFormId");
+
+      return fetch(`${this.base}/formIds`, {
+        method: "post",
+        body,
+        headers: { Authorization: this.auth, ...headers },
+      });
+    },
+  };
 }
