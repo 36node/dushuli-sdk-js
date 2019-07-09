@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.4.0](http:///@36node/dushuli-sdk/compare/v0.3.0...v0.4.0) (2019-07-09)
+
+
+### Features
+
+* add reply ([07be618](http:///@36node/dushuli-sdk/commits/07be618))
+
+
+
 # [0.3.0](http:///@36node/dushuli-sdk/compare/v0.2.0...v0.3.0) (2019-06-26)
 
 
