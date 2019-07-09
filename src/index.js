@@ -558,4 +558,91 @@ export default class SDK {
       });
     },
   };
+  /**
+   * reply's methods
+   */
+  reply = {
+    /**
+     * list all replies
+     *
+     * @param {ListRepliesRequest} req listReplies request
+     * @returns {Promise<ListRepliesResponse>} a paged array of replies
+     */
+    listReplies: (req = {}) => {
+      const { query, headers } = req;
+
+      return fetch(`${this.base}/replies`, {
+        method: "get",
+        query: denormalize(query),
+        headers: { Authorization: this.auth, ...headers },
+      });
+    },
+    /**
+     * create a reply
+     *
+     * @param {CreateReplyRequest} req createReply request
+     * @returns {Promise<CreateReplyResponse>} the reply created
+     */
+    createReply: (req = {}) => {
+      const { headers, body } = req;
+
+      if (!body) throw new Error("requetBody is required for createReply");
+
+      return fetch(`${this.base}/replies`, {
+        method: "post",
+        body,
+        headers: { Authorization: this.auth, ...headers },
+      });
+    },
+    /**
+     * get reply
+     *
+     * @param {GetReplyRequest} req getReply request
+     * @returns {Promise<GetReplyResponse>} Expected response to a valid request
+     */
+    getReply: (req = {}) => {
+      const { replyId, headers } = req;
+
+      if (!replyId) throw new Error("replyId is required for getReply");
+
+      return fetch(`${this.base}/replies/${replyId}`, {
+        method: "get",
+        headers: { Authorization: this.auth, ...headers },
+      });
+    },
+    /**
+     * delete a reply
+     *
+     * @param {DeleteReplyRequest} req deleteReply request
+     * @returns {Promise<DeleteReplyResponse>} reply deleted
+     */
+    deleteReply: (req = {}) => {
+      const { replyId, headers } = req;
+
+      if (!replyId) throw new Error("replyId is required for deleteReply");
+
+      return fetch(`${this.base}/replies/${replyId}`, {
+        method: "delete",
+        headers: { Authorization: this.auth, ...headers },
+      });
+    },
+    /**
+     * update a reply
+     *
+     * @param {UpdateReplyRequest} req updateReply request
+     * @returns {Promise<UpdateReplyResponse>} Expected response to a valid request
+     */
+    updateReply: (req = {}) => {
+      const { replyId, headers, body } = req;
+
+      if (!replyId) throw new Error("replyId is required for updateReply");
+      if (!body) throw new Error("requetBody is required for updateReply");
+
+      return fetch(`${this.base}/replies/${replyId}`, {
+        method: "put",
+        body,
+        headers: { Authorization: this.auth, ...headers },
+      });
+    },
+  };
 }

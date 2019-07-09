@@ -15,6 +15,7 @@ declare class SDK {
   stats: SDK.StatsAPI;
   invitation: SDK.InvitationAPI;
   formId: SDK.FormIdAPI;
+  reply: SDK.ReplyAPI;
 }
 
 declare namespace SDK {
@@ -154,6 +155,28 @@ declare namespace SDK {
      * Save formId 保存小程序 formId
      */
     createFormId(req: CreateFormIdRequest): Promise<CreateFormIdResponse>;
+  }
+  export interface ReplyAPI {
+    /**
+     * list all replies
+     */
+    listReplies(req: ListRepliesRequest): Promise<ListRepliesResponse>;
+    /**
+     * create a reply
+     */
+    createReply(req: CreateReplyRequest): Promise<CreateReplyResponse>;
+    /**
+     * get reply
+     */
+    getReply(req: GetReplyRequest): Promise<GetReplyResponse>;
+    /**
+     * delete a reply
+     */
+    deleteReply(req: DeleteReplyRequest): Promise<DeleteReplyResponse>;
+    /**
+     * update a reply
+     */
+    updateReply(req: UpdateReplyRequest): Promise<UpdateReplyResponse>;
   }
 
   type CreatePaymentRequest = {
@@ -447,6 +470,55 @@ declare namespace SDK {
     body: FormId;
   };
 
+  type ListRepliesRequest = {
+    query: {
+      limit?: number;
+      offset?: string;
+      sort?: string;
+      select?: string;
+
+      filter: {
+        active?: boolean;
+      };
+    };
+  };
+
+  type ListRepliesResponse = {
+    body: Array<Reply>;
+    headers: {
+      xTotalCount: string;
+    };
+  };
+
+  type CreateReplyRequest = {
+    body: Reply;
+  };
+
+  type CreateReplyResponse = {
+    body: Reply;
+  };
+
+  type GetReplyRequest = {
+    replyId: string;
+  };
+
+  type GetReplyResponse = {
+    body: Reply;
+  };
+
+  type DeleteReplyRequest = {
+    replyId: string;
+  };
+
+  type UpdateReplyRequest = {
+    replyId: string;
+    body: Reply;
+  };
+
+  type UpdateReplyResponse = {
+    body: Reply;
+  };
+
   type StatsData = {
     value: number;
   };
@@ -562,6 +634,9 @@ declare namespace SDK {
     user: string;
     birthday: string;
     alarm: string;
+    disableAlarm: boolean;
+    openid: string;
+    appOpenid: string;
   };
 
   type Invitation = {
@@ -621,6 +696,39 @@ declare namespace SDK {
     formId: string;
     used: string;
     expiredAt: string;
+  };
+
+  type ImageContent = {
+    media_id: string;
+    url: string;
+    filename: string;
+  };
+
+  type LinkContent = {
+    title: string;
+    description: string;
+    url: string;
+    thumb_url: string;
+  };
+
+  type Reply = {
+    type: string;
+    keyword: string;
+    msgtype: string;
+    content: string;
+    image: {
+      media_id: string;
+      url: string;
+      filename: string;
+    };
+    link: {
+      title: string;
+      description: string;
+      url: string;
+      thumb_url: string;
+    };
+    active: boolean;
+    index: number;
   };
 
   type Err = {
