@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.5.0](http:///@36node/dushuli-sdk/compare/v0.4.0...v0.5.0) (2020-12-17)
+
+
+### Features
+
+* add wechat msg sec ([1016a10](http:///@36node/dushuli-sdk/commits/1016a10))
+
+
+
 # [0.4.0](http:///@36node/dushuli-sdk/compare/v0.3.0...v0.4.0) (2019-07-09)
 
 
