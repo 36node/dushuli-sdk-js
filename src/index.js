@@ -70,6 +70,24 @@ export default class SDK {
         headers: { Authorization: this.auth, ...headers },
       });
     },
+
+    /**
+     * get wechat message security check
+     *
+     * @param {GetMsgSecCheckRequest} req getMsgSecCheck request
+     * @returns {Promise<GetMsgSecCheckResponse>} Expected response to a valid request
+     */
+    getMsgSecCheck: (req = {}) => {
+      const { query, headers } = req;
+
+      if (!query) throw new Error("query is required for wechat");
+
+      return fetch(`${this.base}/wechat/msgSecCheck`, {
+        method: "get",
+        query: denormalize(query),
+        headers: { Authorization: this.auth, ...headers },
+      });
+    },
   };
   /**
    * member's methods

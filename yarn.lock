@@ -18,15 +18,16 @@
     eslint-plugin-react "7.12.4"
     eslint-plugin-react-hooks "^1.5.0"
 
-"@36node/fetch@^0.5.1":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@36node/fetch/-/fetch-0.5.1.tgz#071b2197887742dac44f06536ebfa1785156bb27"
-  integrity sha512-NwP0IAVGGdXs24pNSylW8S+agqVS4+9E1BGMucIaBAe4aPN5iryJiPLVpwrFN41SZVMdCQVwIJGh08jpiOHe2g==
+"@36node/fetch@^0.6.0":
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/@36node/fetch/-/fetch-0.6.4.tgz#4ed59c3a5a1a61d808b80209c090c01aa153b7f8"
+  integrity sha512-2A2Xc9GlR3yCAlKwaS2bt9bWxVAMz9HkIT+scW7lSZ0iWOcWq2Fog+XWrW+uFkQ76WdbxH4KruKDKyrXD/TD3w==
   dependencies:
     decode-uri-component "^0.2.0"
     http-errors "^1.7.1"
     lodash "^4.17.11"
     node-fetch "^2.2.0"
+    wxapp-http "^3.1.0"
 
 "@36node/query-normalizr@^0.4.0":
   version "0.4.0"
@@ -88,6 +89,11 @@
     require-directory "^2.1.1"
     swagger-parser "^6.0.1"
     uuid "^3.3.2"
+
+"@axetroy/event-emitter.js@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@axetroy/event-emitter.js/-/event-emitter.js-1.2.4.tgz#6366444b146ad56a035799d3baf0fe0a8812dcaa"
+  integrity sha1-Y2ZESxRq1WoDV5nTuvD+CogS3Ko=
 
 "@babel/code-frame@7.0.0", "@babel/code-frame@^7.0.0":
   version "7.0.0"
@@ -14106,6 +14112,13 @@ ws@^6.1.2:
   integrity sha512-GIyAXC2cB7LjvpgMt9EKS2ldqr0MTrORaleiOno6TweZ6r3TKtoFQWay/2PceJ3RuBasOHzXNn5Lrw1X0bEjqA==
   dependencies:
     async-limiter "~1.0.0"
+
+wxapp-http@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/wxapp-http/-/wxapp-http-3.1.0.tgz#c7401f546a53b1d20ace771cdd2868f95bc972cd"
+  integrity sha512-Ce5FrTRcfl1CKzx23YbOBXAnFSZ5DKMaEySqDJR38cFA5ZXMZuE77+9yZT1ARFl+JwBOAOYapwyXE5Yxp9aXjA==
+  dependencies:
+    "@axetroy/event-emitter.js" "^1.2.4"
 
 x-is-string@^0.1.0:
   version "0.1.0"

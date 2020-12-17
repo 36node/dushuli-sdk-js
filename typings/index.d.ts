@@ -33,6 +33,10 @@ declare namespace SDK {
      * get wechat js sdk signature
      */
     getSignature(req: GetSignatureRequest): Promise<GetSignatureResponse>;
+    /**
+     * get wechat message security check
+     */
+    getMsgSecCheck(req: GetMsgSecCheckRequest): Promise<GetMsgSecCheckResponse>;
   }
   export interface MemberAPI {
     /**
@@ -197,6 +201,18 @@ declare namespace SDK {
 
   type GetSignatureResponse = {
     body: GetSignatureResponse;
+  };
+
+  type GetMsgSecCheckRequest = {
+    query: {
+      filter: {
+        content: string;
+      };
+    };
+  };
+
+  type GetMsgSecCheckResponse = {
+    body: GetMsgSecCheckResponse;
   };
 
   type ListMembersRequest = {
@@ -556,6 +572,11 @@ declare namespace SDK {
     nonceStr: string;
     signature: string;
     jsApiList: Array<string>;
+  };
+
+  type GetMsgSecCheckResponse = {
+    errcode: number;
+    errMsg: string;
   };
 
   type Period = {
