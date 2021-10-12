@@ -266,6 +266,113 @@ export default class SDK {
     },
   };
   /**
+   * chart's methods
+   */
+  chart = {
+    /**
+     * list all charts
+     *
+     * @param {ListChartsRequest} req listCharts request
+     * @returns {Promise<ListChartsResponse>} a paged array of charts
+     */
+    listCharts: (req = {}) => {
+      const { query, headers } = req;
+
+      return fetch(`${this.base}/charts`, {
+        method: "get",
+        query: denormalize(query),
+        headers: { Authorization: this.auth, ...headers },
+      });
+    },
+  };
+  /**
+   * ad's methods
+   */
+  ad = {
+    /**
+     * list all ads
+     *
+     * @param {ListAdsRequest} req listAds request
+     * @returns {Promise<ListAdsResponse>} a paged array of ads
+     */
+    listAds: (req = {}) => {
+      const { query, headers } = req;
+
+      return fetch(`${this.base}/ads`, {
+        method: "get",
+        query: denormalize(query),
+        headers: { Authorization: this.auth, ...headers },
+      });
+    },
+    /**
+     * create a ad
+     *
+     * @param {CreateAdRequest} req createAd request
+     * @returns {Promise<CreateAdResponse>} the ad created
+     */
+    createAd: (req = {}) => {
+      const { headers, body } = req;
+
+      if (!body) throw new Error("requetBody is required for createAd");
+
+      return fetch(`${this.base}/ads`, {
+        method: "post",
+        body,
+        headers: { Authorization: this.auth, ...headers },
+      });
+    },
+    /**
+     * get ad by adId
+     *
+     * @param {GetAdRequest} req getAd request
+     * @returns {Promise<GetAdResponse>} Expected response to a valid request
+     */
+    getAd: (req = {}) => {
+      const { adId, headers } = req;
+
+      if (!adId) throw new Error("adId is required for getAd");
+
+      return fetch(`${this.base}/ads/${adId}`, {
+        method: "get",
+        headers: { Authorization: this.auth, ...headers },
+      });
+    },
+    /**
+     * delete a ad
+     *
+     * @param {DeleteAdRequest} req deleteAd request
+     * @returns {Promise<DeleteAdResponse>} ad deleted
+     */
+    deleteAd: (req = {}) => {
+      const { adId, headers } = req;
+
+      if (!adId) throw new Error("adId is required for deleteAd");
+
+      return fetch(`${this.base}/ads/${adId}`, {
+        method: "delete",
+        headers: { Authorization: this.auth, ...headers },
+      });
+    },
+    /**
+     * update ad
+     *
+     * @param {UpdateAdRequest} req updateAd request
+     * @returns {Promise<UpdateAdResponse>} Expected response to a valid request
+     */
+    updateAd: (req = {}) => {
+      const { adId, headers, body } = req;
+
+      if (!adId) throw new Error("adId is required for updateAd");
+      if (!body) throw new Error("requetBody is required for updateAd");
+
+      return fetch(`${this.base}/ads/${adId}`, {
+        method: "put",
+        body,
+        headers: { Authorization: this.auth, ...headers },
+      });
+    },
+  };
+  /**
    * order's methods
    */
   order = {
